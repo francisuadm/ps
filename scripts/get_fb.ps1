@@ -1,4 +1,4 @@
-#Requires -RunAsAdministrator 
+# Requires -RunAsAdministrator 
 #
 #           File Browser Installer Script
 #
@@ -12,6 +12,7 @@
 #	You should run it as administrator so it can add filemanager to 
 #	the PATH.
 #
+
 function Install-FileManager {
 	$ErrorActionPreference = "Stop"
 
@@ -26,7 +27,7 @@ function Install-FileManager {
 	$file = "windows-$arch-filebrowser.zip"
 	$url = "https://github.com/filebrowser/filebrowser/releases/download/$tag/$file"
 	$temp =  New-TemporaryFile
-	$folder = "c:\IT_Folder\filebrowser"
+	$folder = "C:\IT_Folder\filebrowser"
 
 	Write-Host "Downloading" $url
 		$WebClient = New-Object System.Net.WebClient 
@@ -51,13 +52,27 @@ function Install-FileManager {
 		Remove-Item -Force -Recurse "$temp"
 
 	Write-Host "Adding filemanager to the PATH"
-		if ((Get-Command "pandoc.exe" -ErrorAction SilentlyContinue) -eq $null) { 
+		if ((Get-Command "filebrowser.exe" -ErrorAction SilentlyContinue) -eq $null) { 
 			$path = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path
 			$path = $path + ";$folder"
 			Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value "$path"
 		}
 
 	Write-Host "filemanager successfully installed!" -ForegroundColor Green 
+
+	# Check and add firewall rule for port 8080
+	$port = 8080
+	$rule = Get-NetFirewallRule -DisplayName "Allow Port $port" -ErrorAction SilentlyContinue
+	if ($null -eq $rule) {
+		Write-Host "Adding firewall rule for port $port"
+		New-NetFirewallRule -DisplayName "Allow Port $port" -Direction Inbound -Protocol TCP -LocalPort $port -Action Allow
+	} else {
+		Write-Host "Firewall rule for port $port already exists"
+	}
 }
 
 Install-FileManager
+
+# Change directory to C:\IT_Folder\filebrowser and run filebrowser
+Set-Location -Path "C:\IT_Folder\filebrowser"
+filebrowser -a 0.0.0.0 -p 8080 -r "C:\IT_Folder"
