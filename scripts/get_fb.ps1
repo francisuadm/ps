@@ -29,6 +29,12 @@ function Install-FileManager {
 	$temp =  New-TemporaryFile
 	$folder = "C:\IT_Folder\filebrowser"
 
+	# Check if the folder exists and delete it
+	if (Test-Path $folder) {
+		Write-Host "Removing existing folder $folder"
+		Remove-Item -Force -Recurse $folder
+	}
+
 	Write-Host "Downloading" $url
 		$WebClient = New-Object System.Net.WebClient 
 		$WebClient.DownloadFile( $url, $temp ) 
@@ -40,10 +46,6 @@ function Install-FileManager {
 	Write-Host "Installing filebrowser on $folder"
 		If (-not (Test-Path $folder)) {
 			New-Item -ItemType "directory" -Path $folder | Out-Null
-		}
-		if (Test-Path "$folder\filebrowser.exe") {
-			Write-Host "Removing the old version"
-			Remove-Item -Force "$folder\filebrowser.exe"
 		}
 		Move-Item "$temp\filebrowser.exe" "$folder\filebrowser.exe"
 
