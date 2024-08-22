@@ -12,7 +12,7 @@
 #	You should run it as administrator so it can add filemanager to 
 #	the PATH.
 #
-
+# Update Aug 22, 2024 @ 9:23am Uly
 function Install-FileManager {
 	$ErrorActionPreference = "Stop"
 
