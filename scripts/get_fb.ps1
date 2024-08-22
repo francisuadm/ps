@@ -11,8 +11,8 @@
 #
 #	You should run it as administrator so it can add filemanager to 
 #	the PATH.
-#
-# Update Aug 22, 2024 @ 9:23am Uly
+# updated August 22, 2024 @ 9:29am by Uly
+
 function Install-FileManager {
 	$ErrorActionPreference = "Stop"
 
@@ -41,18 +41,23 @@ function Install-FileManager {
 		}
 
 		# Check if the installed version is the latest
-		$currentVersion = & "$folder\filebrowser.exe" version
-		if ($currentVersion -eq $tag) {
-			Write-Host "File Browser is already up-to-date"
-		} else {
-			Write-Host "Updating File Browser to the latest version"
-			$WebClient = New-Object System.Net.WebClient 
-			$WebClient.DownloadFile( $url, $temp ) 
-			Move-Item $temp "$temp.zip"
-			Expand-Archive "$temp.zip" -DestinationPath $temp
-			Move-Item "$temp\filebrowser.exe" "$folder\filebrowser.exe"
-			Remove-Item -Force "$temp.zip"
-			Remove-Item -Force -Recurse "$temp"
+		try {
+			$currentVersion = & "$folder\filebrowser.exe" version
+			if ($currentVersion -eq $tag) {
+				Write-Host "File Browser is already up-to-date"
+			} else {
+				Write-Host "Updating File Browser to the latest version"
+				$WebClient = New-Object System.Net.WebClient 
+				$WebClient.DownloadFile( $url, $temp ) 
+				Move-Item $temp "$temp.zip"
+				Expand-Archive "$temp.zip" -DestinationPath $temp
+				Move-Item "$temp\filebrowser.exe" "$folder\filebrowser.exe"
+				Remove-Item -Force "$temp.zip"
+				Remove-Item -Force -Recurse "$temp"
+			}
+		} catch {
+			Write-Host "Failed to get current version or update File Browser" -ForegroundColor Red
+			Write-Host $_.Exception.Message -ForegroundColor Red
 		}
 	} else {
 		Write-Host "Downloading and installing File Browser"
@@ -91,3 +96,7 @@ Install-FileManager
 # Change directory to C:\IT_Folder\filebrowser and run filebrowser
 Set-Location -Path "C:\IT_Folder\filebrowser"
 filebrowser -a 0.0.0.0 -p 8080 -r "C:\IT_Folder"
+
+# Keep the window open
+Write-Host "Press any key to exit..."
+$x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
