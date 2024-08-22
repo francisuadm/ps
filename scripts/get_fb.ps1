@@ -28,37 +28,50 @@ function Install-FileManager {
 	$url = "https://github.com/filebrowser/filebrowser/releases/download/$tag/$file"
 	$temp =  New-TemporaryFile
 	$folder = "C:\IT_Folder\filebrowser"
+	$dbFile = "$folder\filebrowser.db"
 
-	# Check if the folder exists and delete it
+	# Check if the folder exists
 	if (Test-Path $folder) {
-		Write-Host "Removing existing folder $folder"
-		Remove-Item -Force -Recurse $folder
-	}
+		Write-Host "Folder $folder already exists"
 
-	Write-Host "Downloading" $url
+		# Check if the database file exists and delete it
+		if (Test-Path $dbFile) {
+			Write-Host "Removing existing database file $dbFile"
+			Remove-Item -Force $dbFile
+		}
+
+		# Check if the installed version is the latest
+		$currentVersion = & "$folder\filebrowser.exe" version
+		if ($currentVersion -eq $tag) {
+			Write-Host "File Browser is already up-to-date"
+		} else {
+			Write-Host "Updating File Browser to the latest version"
+			$WebClient = New-Object System.Net.WebClient 
+			$WebClient.DownloadFile( $url, $temp ) 
+			Move-Item $temp "$temp.zip"
+			Expand-Archive "$temp.zip" -DestinationPath $temp
+			Move-Item "$temp\filebrowser.exe" "$folder\filebrowser.exe"
+			Remove-Item -Force "$temp.zip"
+			Remove-Item -Force -Recurse "$temp"
+		}
+	} else {
+		Write-Host "Downloading and installing File Browser"
 		$WebClient = New-Object System.Net.WebClient 
 		$WebClient.DownloadFile( $url, $temp ) 
-	
-	Write-Host "Extracting $temp.zip"
 		Move-Item $temp "$temp.zip"
 		Expand-Archive "$temp.zip" -DestinationPath $temp
-
-	Write-Host "Installing filebrowser on $folder"
-		If (-not (Test-Path $folder)) {
-			New-Item -ItemType "directory" -Path $folder | Out-Null
-		}
+		New-Item -ItemType "directory" -Path $folder | Out-Null
 		Move-Item "$temp\filebrowser.exe" "$folder\filebrowser.exe"
-
-	Write-Host "Cleaning temporary files"
 		Remove-Item -Force "$temp.zip"
 		Remove-Item -Force -Recurse "$temp"
+	}
 
 	Write-Host "Adding filemanager to the PATH"
-		if ((Get-Command "filebrowser.exe" -ErrorAction SilentlyContinue) -eq $null) { 
-			$path = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path
-			$path = $path + ";$folder"
-			Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value "$path"
-		}
+	if ((Get-Command "filebrowser.exe" -ErrorAction SilentlyContinue) -eq $null) { 
+		$path = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path
+		$path = $path + ";$folder"
+		Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH -Value "$path"
+	}
 
 	Write-Host "filemanager successfully installed!" -ForegroundColor Green 
 
