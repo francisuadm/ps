@@ -21,3 +21,5 @@ Import-Module QRCodeGenerator
 # PS C:\reports> New-QRCodeTwitter -ProfileName -Show
 # PS C:\reports> New-QRCodeURI -URI http://google.com -Show
 # PS C:\reports> New-QRCodeVCard -FirstName -LastName -Company -Show
+# 
+# more info at https://winaero.com/generate-qr-code-powershell-windows-10/
