@@ -1,3 +1,5 @@
+# https://powershell.one/res/modules/qrcodegenerator
+
 Install-Module -Name QRCodeGenerator
 Import-Module QRCodeGenerator
 Add-Type -assembly System.Windows.Forms
