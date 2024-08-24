@@ -15,3 +15,9 @@ Import-Module QRCodeGenerator
 
 # Generate a vCard QR code: New-QRCodeVCard -FirstName $first -LastName $last -Company $company -Email$email -OutPath $path
 # Generate a Geolocation QR code: New-QRCodeGeolocation -Address $address -OutPath
+# PS C:\reports> New-QRCodeText -Text "Hello" -Show
+
+# PS C:\reports> New-QRCodeGeolocation -Latitude 1 -Longitude 3 -Show
+# PS C:\reports> New-QRCodeTwitter -ProfileName -Show
+# PS C:\reports> New-QRCodeURI -URI http://google.com -Show
+# PS C:\reports> New-QRCodeVCard -FirstName -LastName -Company -Show
