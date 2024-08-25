@@ -11,3 +11,13 @@ Then, right-click the command line result.
 Select run as administrator from the context menu.
 Type this command at the prompt:
 ```wmic path softwareLicensingService get OA3xOriginalProductKey```
+
+#
+2. PowerShell
+   
+If you are using Windows 10 PowerShell, the process is similar:
+
+Right-click the Start Menu button.
+Select Windows PowerShell (Admin) from the context menu.
+Type this command at the prompt to reveal the product key (Figure B).
+```powershell "(Get-WmiObject -query 'select * from SoftwareLicensingService').OA3xOriginalProductKey"```
