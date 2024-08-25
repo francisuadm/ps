@@ -6,4 +6,5 @@ CHECK URL
 >  2.``https://it-infrastructure.solutions/create-a-wifi-qr-code-powershell/``
 > > > > >
 >  3.``https://medium.com/asecuritysite-when-bob-met-alice/the-mighty-code-that-saved-lives-meet-the-qr-code-4654de3f96eb``
-
+> > > > >
+>  4.``https://github.com/HumanEquivalentUnit/PowerShell-Misc/blob/master/GoogleAuthenticator.psm1``
