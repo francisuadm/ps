@@ -1,74 +1,114 @@
-# Check if QRCodeGenerator module is installed
+# Region: Module Management & Execution Policy
+
+# Check if QRCodeGenerator module is installed. If not, install it.
 if (-not (Get-Module QRCodeGenerator -ListAvailable)) {
-    # Install the module if not found
-    Write-Host "Installing QRCodeGenerator module..."
-    Install-Module -Name QRCodeGenerator
+    Write-Host "Installing QRCodeGenerator module..." -ForegroundColor Green
+    Install-Module -Name QRCodeGenerator -Force
 }
 
-# Check if execution policy is set to Unrestricted
-$currentPolicy = Get-ExecutionPolicy
-
-if ($currentPolicy -ne 'Unrestricted') {
-    # Set execution policy to Unrestricted if not set
-    Write-Host "Setting execution policy to Unrestricted..."
-    Set-ExecutionPolicy Unrestricted -Scope Process
+# Set execution policy to Unrestricted temporarily for this script's session.
+# This allows running scripts downloaded from the internet.
+if ((Get-ExecutionPolicy -Scope Process) -ne 'Unrestricted') {
+    Write-Host "Setting execution policy to Unrestricted for this session..." -ForegroundColor Yellow
+    Set-ExecutionPolicy Unrestricted -Scope Process -Force
 }
 
-# Import the QRCodeGenerator module
+# Import the QRCodeGenerator module to access its cmdlets.
 Import-Module QRCodeGenerator
 
-# Create a menu for user selection
-while ($true) {
-    Write-Host "Select an option:"
+# EndRegion
+
+# Region: Main Menu & Input Validation
+
+# Function to display the main menu.
+function Show-Menu {
+    Clear-Host
+    Write-Host "QR Code Generator Menu" -ForegroundColor Cyan
+    Write-Host "----------------------"
     Write-Host "1. Generate WiFi QR Code"
     Write-Host "2. Generate Text QR Code"
     Write-Host "3. Generate vCard QR Code"
     Write-Host "4. Generate URL QR Code"
-    Write-Host "0. Exit"
+    Write-Host "Q. Quit"
+}
 
-    $choice = Read-Host "Enter your choice:"
+# Function to get valid user input for the menu.
+function Get-MenuChoice {
+    $choice = Read-Host "Enter your choice"
+
+    while (($choice -notin 1..4) -and ($choice.ToUpper() -ne 'Q')) {
+        Write-Host "Invalid choice. Please try again." -ForegroundColor Red
+        $choice = Read-Host "Enter your choice"
+    }
+
+    return $choice
+}
+
+# EndRegion
+
+# Region: QR Code Generation Functions
+
+# Function to generate a WiFi QR code.
+function Generate-WifiQRCode {
+    $ssid = Read-Host "Enter SSID"
+    $password = Read-Host -AsSecureString "Enter password" | ConvertFrom-SecureString
+    $security = Read-Host "Enter security type (e.g., WPA2-PSK)"
+
+    New-QRCodeWifiAccess -SSID $ssid -Password $password -Security $security -Show
+}
+
+# Function to generate a text QR code.
+function Generate-TextQRCode {
+    $text = Read-Host "Enter text"
+
+    New-QRCodeText -Text $text -Show
+}
+
+# Function to generate a vCard QR code.
+function Generate-VcardQRCode {
+    $name = Read-Host "Enter name"
+    $organization = Read-Host "Enter organization"
+    $title = Read-Host "Enter title"
+    $email = Read-Host "Enter email"
+    $phone = Read-Host "Enter phone number"
+
+    New-QRCodeVCard -Name $name -Organization $organization -Title $title -Email $email -Phone $phone -Show
+}
+
+# Function to generate a URL QR code.
+function Generate-UrlQRCode {
+    $url = Read-Host "Enter URL"
+
+    New-QRCodeURI -URI $url -Show
+}
+
+# EndRegion
+
+# Main script execution loop.
+$continue = $true # Initialize a variable to control the loop
+
+while ($continue) {
+    Show-Menu
+
+    $choice = Get-MenuChoice
 
     switch ($choice) {
-        1 {
-            # Get WiFi parameters from user
-            $ssid = Read-Host "Enter SSID:"
-            $password = Read-Host "Enter password:"
-            $security = Read-Host "Enter security type (e.g., WPA2-PSK):"
-
-            # Generate WiFi QR code and show on screen
-            New-QRCodeWifiAccess -SSID $ssid -Password $password -Security $security -Show
-        }
-        2 {
-            # Get text from user
-            $text = Read-Host "Enter text:"
-
-            # Generate text QR code and show on screen
-            New-QRCodeText -Text $text -Show
-        }
-        3 {
-            # Get vCard information from user
-            $name = Read-Host "Enter name:"
-            $organization = Read-Host "Enter organization:"
-            $title = Read-Host "Enter title:"
-            $email = Read-Host "Enter email:"
-            $phone = Read-Host "Enter phone number:"
-
-            # Generate vCard QR code and show on screen
-            New-QRCodeVCard -Name $name -Organization $organization -Title $title -Email $email -Phone $phone -Show
-        }
-        4 {
-            # Get URL from user
-            $url = Read-Host "Enter URL:"
-
-            # Generate URL QR code and show on screen
-            New-QRCodeURI -URI $url -Show
-        }
-        0 {
-            Write-Host "Exiting..."
-            break;  # Explicitly break out of the while loop
-        }
-        default {
-            Write-Host "Invalid choice. Please try again."
+        1 { Generate-WifiQRCode }
+        2 { Generate-TextQRCode }
+        3 { Generate-VcardQRCode }
+        4 { Generate-UrlQRCode }
+        'Q' { 
+            Write-Host "Exiting..." -ForegroundColor Green
+            $continue = $false # Set the variable to false to exit the loop
         }
     }
+
+    if ($continue) { # Only prompt if the loop will continue
+        Read-Host "Press Enter to continue..." 
+    }
+}
+
+# Reset execution policy back to its original state for this session.
+if ((Get-ExecutionPolicy -Scope Process) -ne 'Unrestricted') {
+    Set-ExecutionPolicy -ExecutionPolicy (Get-ExecutionPolicy -Scope Process) -Scope Process -Force
 }
