@@ -66,13 +66,15 @@ function Generate-TextQRCode {
 
 # Function to generate a vCard QR code.
 function Generate-VcardQRCode {
-    $name = Read-Host "Enter name"
+    $firstName = Read-Host "Enter first name"
+    $lastName = Read-Host "Enter last name"
     $organization = Read-Host "Enter organization"
     $title = Read-Host "Enter title"
     $email = Read-Host "Enter email"
     $phone = Read-Host "Enter phone number"
 
-    New-QRCodeVCard -Name $name -Organization $organization -Title $title -Email $email -Phone $phone -Show
+    # Use the updated cmdlet and parameters 
+    New-PSOneQRCodeVCard -FirstName $firstName -LastName $lastName -Organization $organization -Title $title -Email $email -Phone $phone -Show
 }
 
 # Function to generate a URL QR code.
