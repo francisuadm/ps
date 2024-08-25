@@ -11,4 +11,4 @@ CHECK URL
 > > > > >
 >  5.``https://humanequivalentunit.github.io/Google-Authenticator-In-PowerShell/``
 >
-> 
+>  6.``https://www.pr0mpt.com/2018-08-11-qr-codes-and-practical-usage/``
