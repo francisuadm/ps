@@ -52,9 +52,9 @@ function Get-MenuChoice {
 function Generate-WifiQRCode {
     $ssid = Read-Host "Enter SSID"
     $password = Read-Host -AsSecureString "Enter password" | ConvertFrom-SecureString
-    $security = Read-Host "Enter security type (e.g., WPA2-PSK)"
+    
 
-    New-QRCodeWifiAccess -SSID $ssid -Password $password -Security $security -Show
+    New-QRCodeWifiAccess -SSID $ssid -Password $password -Show
 }
 
 # Function to generate a text QR code.
@@ -69,12 +69,11 @@ function Generate-VcardQRCode {
     $firstName = Read-Host "Enter first name"
     $lastName = Read-Host "Enter last name"
     $organization = Read-Host "Enter organization"
-    $title = Read-Host "Enter title"
     $email = Read-Host "Enter email"
-    $phone = Read-Host "Enter phone number"
+    
 
     # Use the updated cmdlet and parameters 
-    New-PSOneQRCodeVCard -FirstName $firstName -LastName $lastName -Organization $organization -Title $title -Email $email -Phone $phone -Show
+    New-PSOneQRCodeVCard -FirstName $firstName -LastName $lastName -Company $organization -Email $email -Show
 }
 
 # Function to generate a URL QR code.
