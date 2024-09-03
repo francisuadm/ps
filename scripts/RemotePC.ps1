@@ -82,6 +82,14 @@ if (-not (Test-Path -Path $logFolderPath)) {
     New-Item -ItemType Directory -Path $logFolderPath
 }
 
+# add user to localadmin as member
+#Invoke-Command -Session $session -ScriptBlock {
+        # Add-LocalGroupMember -Group Administrators -Member usernameHERE
+        # Add-LocalGroupMember -Group Administrators -Member usernameHERE
+        # remove-LocalGroupMember -Group 'administrators' -Member usernameHERE
+#}
+
+
 # Log the computer name to the log file
 $logFilePath = "$logFolderPath\remote_log.txt"
 $logEntry = "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') - $computerName"
