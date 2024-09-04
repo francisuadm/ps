@@ -36,3 +36,7 @@ Source: Conversation with Copilot, 9/4/2024
 (3) How do we fix 0x8a15000f : Data required by the source is missing?. https://learn.microsoft.com/en-us/answers/questions/1688882/how-do-we-fix-0x8a15000f-data-required-by-the-sour.
 (4) undefined. https://storeedgefd.dsx.mp.microsoft.com/v9.0.
 (5) undefined. https://cdn.winget.microsoft.com/cache.
+
+
+
+https://cdn.winget.microsoft.com/cache/source.msix
