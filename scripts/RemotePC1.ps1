@@ -1,12 +1,3 @@
-Sure, I'd be happy to help you with your PowerShell script! It looks like you've put a lot of effort into it. Here are a few suggestions and improvements:
-
-1. **Credential Handling**: It's generally better to use `Get-Credential` for handling credentials securely.
-2. **Error Handling**: Adding error handling can make your script more robust.
-3. **Formatting**: Some minor formatting improvements for readability.
-
-Here's a revised version of your script with these suggestions:
-
-```powershell
 # Clear the host display
 Clear-Host
 
@@ -110,6 +101,3 @@ Write-Host
 # Create a new PowerShell session and enter it
 $Session = New-PSSession -ComputerName $computerName -ErrorAction SilentlyContinue
 Enter-PSSession -Session $Session -ErrorAction SilentlyContinue
-```
-
-I hope this helps! Let me know if you have any questions or need further assistance.
