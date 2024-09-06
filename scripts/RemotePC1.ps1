@@ -114,8 +114,6 @@ $domain = Read-Host "Enter domain"
 $username = Read-Host "Enter username"
 $credential = Get-Credentials -domain $domain -username $username
 
-Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command `"powershell`"' -Verb RunAs`"" -Credential $credential
-
 Write-Host "Require Admin access on PowerShell ISE" -ForegroundColor White
 Write-Host "To display the remote computer IP and MAC Address:" -ForegroundColor White
 Write-Host
