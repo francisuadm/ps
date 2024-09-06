@@ -16,5 +16,5 @@ powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -Executi
 
 > #### Remotely Control 1
 ```
-powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"iwr -useb https://raw.githubusercontent.com/francisuadm/ps/main/scripts/RemotePC1.ps1 | iex\"' -Verb RunAs"
+Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File "C:\path\to\RemotePC1.ps1"' -Verb RunAs
 ```
