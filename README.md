@@ -18,3 +18,8 @@ powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -Executi
 ```
 powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"iwr -useb https://raw.githubusercontent.com/francisuadm/ps/main/scripts/RemotePC1.ps1 | iex\"' -Verb RunAs"
 ```
+
+> #### Winget for Windows 10
+```
+powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"iwr -useb https://raw.githubusercontent.com/francisuadm/chrome/main/ps/Installer_Winget1.ps1 | iex\"' -Verb RunAs"
+```
