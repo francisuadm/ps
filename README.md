@@ -13,3 +13,8 @@ powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -Executi
 ```
 powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"iwr -useb https://raw.githubusercontent.com/francisuadm/ps/main/scripts/RemotePC.ps1 | iex\"' -Verb RunAs"
 ```
+
+> #### Remotely Control 1
+```
+powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"iwr -useb https://raw.githubusercontent.com/francisuadm/ps/main/scripts/RemotePC1.ps1 | iex\"' -Verb RunAs"
+```
