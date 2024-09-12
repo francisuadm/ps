@@ -99,6 +99,9 @@ Write-Host
 # Create a new PowerShell session and enter it
 # $Session = New-PSSession -Computer $computerName -ErrorAction SilentlyContinue
 # Enter-PSSession -Session $Session -ErrorAction SilentlyContinue
+Invoke-Command -Session $session -ScriptBlock {
+powershell
+}
 
 # Keep the window open
 Write-Host "Press any key to exit..."
