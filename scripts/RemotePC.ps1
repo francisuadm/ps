@@ -97,8 +97,8 @@ Add-Content -Path $logFilePath -Value $logEntry
 Write-Host
 Write-Host
 # Create a new PowerShell session and enter it
-# $Session = New-PSSession -Computer $computerName -ErrorAction SilentlyContinue
-Enter-PSSession -Session $Session -ErrorAction SilentlyContinue
+$Session1 = New-PSSession -Computer $computerName -ErrorAction SilentlyContinue
+Enter-PSSession -Session $Session1 -ErrorAction SilentlyContinue
 
 # Keep the window open
 Write-Host "Press any key to exit..."
