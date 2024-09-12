@@ -38,3 +38,8 @@ powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -Executi
 powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"powershell"' -Verb RunAs"
 ```
 
+> #### Run PowerShell command runas.
+```
+runas /noprofile /user:%userdomain%\a-%username% powershell
+```
+
