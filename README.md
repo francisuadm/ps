@@ -42,4 +42,8 @@ powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -Executi
 ```
 runas /noprofile /user:%userdomain%\a-%username% powershell
 ```
+> > ####
+```
+iwr -useb https://raw.githubusercontent.com/francisuadm/ps/main/scripts/RemovePCUserFolder.ps1 | iex
+```
 
