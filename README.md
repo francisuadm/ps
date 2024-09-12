@@ -37,3 +37,7 @@ powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -Executi
 ```
 powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"iwr -useb https://raw.githubusercontent.com/francisuadm/ps/main/scripts/RunAs_Prompt.ps1 | iex\"' -Verb RunAs"
 ```
+> #### Run PowerShell command another user account.
+```
+powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"iwr -useb https://raw.githubusercontent.com/francisuadm/ps/main/scripts/RunAs_Prompt1.ps1 | iex\"' -Verb RunAs"
+```
