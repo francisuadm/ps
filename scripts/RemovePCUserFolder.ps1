@@ -39,6 +39,7 @@ if (Test-Connection -ComputerName $computerName -Count 1 -Quiet) {
     Write-Host "The computer $computerName is not reachable." -ForegroundColor Red
 }
 
+
 # Keep the window open
 Write-Host "Press any key to exit..."
 $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
