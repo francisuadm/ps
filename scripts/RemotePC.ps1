@@ -29,47 +29,47 @@ if (Test-Connection -ComputerName $computerName -Count 1 -Quiet) {
     Write-Host "$ipAddress" -ForegroundColor Green
 
     # Remote into the machine and get the MAC address
-    $macAddress = Invoke-Command -ComputerName $computerName -ScriptBlock {
-        Get-WmiObject -Class Win32_NetworkAdapterConfiguration -Filter IPEnabled=TRUE | Select-Object -ExpandProperty MACAddress
-    }
-    Write-Host "MAC Address: " -ForegroundColor White -NoNewline
-    Write-Host "$macAddress" -ForegroundColor Green
+#    $macAddress = Invoke-Command -ComputerName $computerName -ScriptBlock {
+#        Get-WmiObject -Class Win32_NetworkAdapterConfiguration -Filter IPEnabled=TRUE | Select-Object -ExpandProperty MACAddress
+#    }
+#    Write-Host "MAC Address: " -ForegroundColor White -NoNewline
+#    Write-Host "$macAddress" -ForegroundColor Green
 
     # Confirm BIOS version
-    $biosVersion = Invoke-Command -ComputerName $computerName -ScriptBlock {
-        Get-WmiObject -Class Win32_BIOS | Select-Object -ExpandProperty SMBIOSBIOSVersion
-    }
-    Write-Host "Current BIOS Version: " -ForegroundColor White -NoNewline
-    Write-Host "$biosVersion" -ForegroundColor Green
-    Write-Host
-    Write-Host "|------------------------------|" -ForegroundColor Cyan
+#    $biosVersion = Invoke-Command -ComputerName $computerName -ScriptBlock {
+#        Get-WmiObject -Class Win32_BIOS | Select-Object -ExpandProperty SMBIOSBIOSVersion
+#    }
+#    Write-Host "Current BIOS Version: " -ForegroundColor White -NoNewline
+#    Write-Host "$biosVersion" -ForegroundColor Green
+#    Write-Host
+#    Write-Host "|------------------------------|" -ForegroundColor Cyan
 
     # Remote into the machine and get the local group members
-    $adminGroupMembers = Invoke-Command -ComputerName $computerName -ScriptBlock {
-        Get-LocalGroupMember -Name 'Administrators' | Select-Object Name, ObjectClass, PrincipalSource
-    }
-    Write-Host "Administrators Group Members:" -ForegroundColor White
+#    $adminGroupMembers = Invoke-Command -ComputerName $computerName -ScriptBlock {
+#        Get-LocalGroupMember -Name 'Administrators' | Select-Object Name, ObjectClass, PrincipalSource
+#    }
+#    Write-Host "Administrators Group Members:" -ForegroundColor White
 
     # Display the admin group members in a table format
-    $adminGroupMembers | FT
+#    $adminGroupMembers | FT
 
     # Wireless INFO
-    $WiFi = Invoke-Command -ComputerName $computerName -ScriptBlock {
-        Get-NetAdapter -Physical
-    }
-    $WiFiINFO = $WiFi | Select Name, MacAddress, LinkSpeed, AdminStatus, DriverDescription
+#    $WiFi = Invoke-Command -ComputerName $computerName -ScriptBlock {
+#        Get-NetAdapter -Physical
+#    }
+#    $WiFiINFO = $WiFi | Select Name, MacAddress, LinkSpeed, AdminStatus, DriverDescription
 
     # Display the header in White
-    Write-Host "Name         MacAddress               LinkSpeed     Status      DriverDescription" -ForegroundColor White
+#    Write-Host "Name         MacAddress               LinkSpeed     Status      DriverDescription" -ForegroundColor White
 
     # Display each property in a different color
-    foreach ($adapter in $WiFiINFO) {
-        Write-Host ($adapter.Name + "        ") -NoNewline -ForegroundColor Cyan
-        Write-Host ($adapter.MacAddress + "        ") -NoNewline -ForegroundColor Cyan
-        Write-Host ($adapter.LinkSpeed + "        ") -NoNewline -ForegroundColor Green
-        Write-Host ($adapter.AdminStatus + "        ") -NoNewline -ForegroundColor Blue
-        Write-Host ($adapter.DriverDescription) -ForegroundColor Cyan
-    }
+#    foreach ($adapter in $WiFiINFO) {
+#        Write-Host ($adapter.Name + "        ") -NoNewline -ForegroundColor Cyan
+#        Write-Host ($adapter.MacAddress + "        ") -NoNewline -ForegroundColor Cyan
+#        Write-Host ($adapter.LinkSpeed + "        ") -NoNewline -ForegroundColor Green
+#        Write-Host ($adapter.AdminStatus + "        ") -NoNewline -ForegroundColor Blue
+#        Write-Host ($adapter.DriverDescription) -ForegroundColor Cyan
+#    }
 
 } else {
     # If the machine is not online, display a message
