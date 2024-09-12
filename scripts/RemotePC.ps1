@@ -101,3 +101,7 @@ Write-Host
 # Create a new PowerShell session and enter it
 $Session = New-PSSession -Computer $computerName -ErrorAction SilentlyContinue
 Enter-PSSession -Session $Session -ErrorAction SilentlyContinue
+
+# Keep the window open
+Write-Host "Press any key to exit..."
+$x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
