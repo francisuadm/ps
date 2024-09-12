@@ -27,6 +27,8 @@ if (Test-Connection -ComputerName $computerName -Count 1 -Quiet) {
     Write-Host "$computerName" -ForegroundColor Green
     Write-Host "IP Address: " -ForegroundColor White -NoNewline
     Write-Host "$ipAddress" -ForegroundColor Green
+    $Session1 = New-PSSession -Computer $computerName -ErrorAction SilentlyContinue
+    Enter-PSSession -Session $Session1 -ErrorAction SilentlyContinue
 
     # Remote into the machine and get the MAC address
 #    $macAddress = Invoke-Command -ComputerName $computerName -ScriptBlock {
@@ -97,8 +99,8 @@ Add-Content -Path $logFilePath -Value $logEntry
 Write-Host
 Write-Host
 # Create a new PowerShell session and enter it
-$Session1 = New-PSSession -Computer $computerName -ErrorAction SilentlyContinue
-Enter-PSSession -Session $Session1 -ErrorAction SilentlyContinue
+# $Session1 = New-PSSession -Computer $computerName -ErrorAction SilentlyContinue
+# Enter-PSSession -Session $Session1 -ErrorAction SilentlyContinue
 
 # Keep the window open
 Write-Host "Press any key to exit..."
