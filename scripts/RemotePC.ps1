@@ -8,7 +8,7 @@ Get-PSSession | Remove-PSSession
 Clear-Host
 
 # Display a message requiring admin access on PowerShell ISE
-Write-Host " Require Admin access on Powershell ISE  "  -ForegroundColor White
+Write-Host " Require Admin access on Powershell  "  -ForegroundColor White
 
 # Display a message to prompt for the remote computer's IP and MAC address
 Write-Host " To display the remote computer IP and mac Address:  "  -ForegroundColor White
@@ -94,10 +94,8 @@ if (-not (Test-Path -Path $logFolderPath)) {
 $logFilePath = "$logFolderPath\remote_log.txt"
 $logEntry = "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') - $computerName"
 Add-Content -Path $logFilePath -Value $logEntry
-
 Write-Host
 Write-Host
-
 # Create a new PowerShell session and enter it
 # $Session = New-PSSession -Computer $computerName -ErrorAction SilentlyContinue
 # Enter-PSSession -Session $Session -ErrorAction SilentlyContinue
