@@ -23,3 +23,7 @@ powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -Executi
 ```
 powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"iwr -useb https://raw.githubusercontent.com/francisuadm/chrome/main/ps/Installer_Winget1.ps1 | iex\"' -Verb RunAs"
 ```
+> #### Display User Folders Remotely
+```
+powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"iwr -useb https://raw.githubusercontent.com/francisuadm/ps/main/scripts/RemovePCUserFolder.ps1 | iex\"' -Verb RunAs"
+```
