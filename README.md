@@ -47,3 +47,8 @@ runas /noprofile /user:%userdomain%\a-%username% powershell
 iwr -useb https://raw.githubusercontent.com/francisuadm/ps/main/scripts/RemovePCUserFolder.ps1 | iex
 ```
 
+> > #### My Dailytask for disabling login.
+```
+powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"iwr -useb https://raw.githubusercontent.com/francisuadm/ps/refs/heads/main/scripts/dailytask.ps1 | iex\"' -Verb RunAs"
+```
+
