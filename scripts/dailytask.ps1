@@ -1,6 +1,6 @@
 # https://raw.githubusercontent.com/francisuadm/chrome/main/ps/task.ps1
 $taskName = "MyDailyTask"
-$domainUsers = $env:UserName
+$domainUsers = "$env:UserName"
 $taskPath = "c:\IT_folder\dailytask.bat"
 $fileContent = @"
 @echo off
