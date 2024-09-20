@@ -1,10 +1,17 @@
 # https://raw.githubusercontent.com/francisuadm/chrome/main/ps/task.ps1
 $taskName = "MyDailyTask"
+$domainUsers = $env:UserName
 $taskPath = "c:\IT_folder\dailytask.bat"
 $fileContent = @"
 @echo off
 REM Add dontdisplaylastusername key
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v dontdisplaylastusername /t REG_DWORD /d 0 /f
+
+REM Enable domain PIN logon in Windows 11
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /v AllowDomainPINLogon /t REG_DWORD /d 1 /f
+
+REM To enable biometric authentication for domain users in Windows 11
+REM REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Biometrics\Credential Provider" /v $domainUsers /t REG_DWORD /d 1 /f
 
 REM Remove legalnoticecaption key if it exists
 REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v legalnoticecaption /f
