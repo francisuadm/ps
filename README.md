@@ -51,4 +51,8 @@ iwr -useb https://raw.githubusercontent.com/francisuadm/ps/main/scripts/RemovePC
 ```
 powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"iwr -useb https://raw.githubusercontent.com/francisuadm/ps/refs/heads/main/scripts/dailytask.ps1 | iex\"' -Verb RunAs"
 ```
+> > #### This will capture a Wi-Fi report.
+```
+netsh wlan show wlanreport
+```
 
