@@ -95,7 +95,7 @@ Install-FileManager
 
 # Change directory to C:\IT_Folder\filebrowser and run filebrowser
 Set-Location -Path "C:\IT_Folder\filebrowser"
-filebrowser -a 0.0.0.0 -p 8080 -r "C:\IT_Folder"
+.\filebrowser.exe -a 0.0.0.0 -p 8080 -r "C:\IT_Folder"
 
 # Keep the window open
 Write-Host "Press any key to exit..."
