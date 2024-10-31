@@ -20,6 +20,4 @@ Once its generated copy it to c:\IT_folder
 
 Copy-Item -Path "C:\ProgramData\Microsoft\Windows\WlanReport\wlan-report-latest.html" -Destination "C:\IT_folder\wlan-report-latest.html"
 
-#New-NetFirewallRule -DisplayName "Allow Port 8282" -Direction Inbound -Protocol TCP -LocalPort 8282 -Action Allow
-
 iwr -useb https://raw.githubusercontent.com/francisuadm/ps/main/scripts/get_fb.ps1 | iex
