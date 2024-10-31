@@ -1,4 +1,6 @@
+#### This is the manual way to generate the Wlanreport and getting via Filebrowser.
 ### from run command:
+
 
 C:\WINDOWS\system32\runas.exe /profile /env /user:%userdomain%\a-%username% powershell
 
